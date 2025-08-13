@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encontro 1: Preparação para a Imersão no Território</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Coastal Forest -->
+    <!-- Application Structure Plan: A single-page application with a vertical scrolling structure, where each section corresponds to a slide from the source document. A top navigation bar provides smooth-scroll links to each section, allowing for both linear and non-linear exploration. This structure was chosen to maintain the logical flow of the workshop while enhancing it with interactivity, making it more engaging and effective for learning than a static presentation. Key interactions include toggles for concepts, an interactive system map builder, and clickable cards for techniques. -->
+    <!-- Visualization & Content Choices: 
+        - Agenda (Slide 2): Interactive cards with icons, acting as a visual table of contents with smooth-scroll navigation. Goal: Organize & Navigate. Method: HTML/JS.
+        - Observe vs. Interpret (Slide 3): An interactive toggle switch. Clicking it flips between the "Observe" and "Interpret" concepts, clearly demonstrating the difference. Goal: Inform & Engage. Method: HTML/JS.
+        - Systems Mapping (Slide 4): An interactive diagram where users can click on "Atores", "Recursos", and "Fluxos" to see example questions, helping them build their hypothesis map. Goal: Inform & Guide. Method: HTML/JS.
+        - Observation Techniques (Slide 5): Presented as a series of clickable cards. Clicking a card reveals a detailed description of the technique. This reduces cognitive load by presenting information progressively. Goal: Inform. Method: HTML/JS.
+        - Justification: These interactive elements transform passive information into active learning tools, encouraging exploration and better retention of the workshop's core concepts. All visuals are built with HTML/CSS and Unicode characters.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
+        }
+        .hero {
+            background-image: linear-gradient(rgba(0, 51, 102, 0.7), rgba(0, 51, 102, 0.7)), url('https://placehold.co/1600x900/003366/FFFFFF?text=Litoral+do+Paran%C3%A1');
+            background-size: cover;
+            background-position: center;
+        }
+        .section-title {
+            color: #005f73;
+        }
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+        .nav-item.active {
+            color: #00a896;
+            font-weight: 700;
+        }
+        .details-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="text-xl font-bold text-teal-800">Encontro 1</div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#slide2" class="nav-item text-gray-600 hover:text-teal-600">Agenda</a>
+                    <a href="#slide3" class="nav-item text-gray-600 hover:text-teal-600">Mentalidade</a>
+                    <a href="#slide4" class="nav-item text-gray-600 hover:text-teal-600">Mapeamento</a>
+                    <a href="#slide5" class="nav-item text-gray-600 hover:text-teal-600">Técnicas</a>
+                    <a href="#slide6" class="nav-item text-gray-600 hover:text-teal-600">Plano</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Slide 1: Título -->
+    <header id="slide1" class="hero h-screen flex flex-col justify-center items-center text-white text-center p-4">
+        <h1 class="text-4xl md:text-6xl font-bold leading-tight">Preparação para a Imersão no Território</h1>
+        <p class="mt-4 text-lg md:text-xl max-w-3xl">Vamos aprender a ler o ambiente, os sistemas e as dinâmicas do local para construir uma base sólida para a nossa investigação.</p>
+    </header>
+
+    <main class="container mx-auto px-4 py-16">
+
+        <!-- Slide 2: Agenda -->
+        <section id="slide2" class="py-16 text-center">
+            <h2 class="text-4xl font-bold section-title mb-4">Nossa Jornada de Hoje</h2>
+            <p class="text-lg text-gray-600 mb-12 max-w-2xl mx-auto">Um roteiro prático para nos tornarmos exploradores do território, passo a passo.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="card bg-white p-6 rounded-xl shadow-lg">
+                    <div class="text-4xl mb-4">🧠</div>
+                    <h3 class="text-xl font-semibold mb-2">1. Mente de Principiante</h3>
+                    <p class="text-gray-600">A arte de ver o familiar como se fosse a primeira vez.</p>
+                </div>
+                <div class="card bg-white p-6 rounded-xl shadow-lg">
+                    <div class="text-4xl mb-4">🗺️</div>
+                    <h3 class="text-xl font-semibold mb-2">2. Mapa de Hipóteses</h3>
+                    <p class="text-gray-600">Desenhando o que esperamos encontrar no campo.</p>
+                </div>
+                <div class="card bg-white p-6 rounded-xl shadow-lg">
+                    <div class="text-4xl mb-4">🧭</div>
+                    <h3 class="text-xl font-semibold mb-2">3. Lentes de Explorador</h3>
+                    <p class="text-gray-600">Técnicas práticas para observar o ambiente.</p>
+                </div>
+                <div class="card bg-white p-6 rounded-xl shadow-lg">
+                    <div class="text-4xl mb-4">✈️</div>
+                    <h3 class="text-xl font-semibold mb-2">4. Plano de Voo</h3>
+                    <p class="text-gray-600">Organizando nossa missão de imersão.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 3: Atividade 1 -->
+        <section id="slide3" class="py-16 bg-teal-50/50 rounded-2xl">
+            <h2 class="text-4xl font-bold section-title text-center mb-12">Como um Explorador em Terra Desconhecida</h2>
+            <div class="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-md">
+                <h3 class="text-2xl font-bold mb-4">Dinâmica: Observar vs. Interpretar</h3>
+                <p class="text-gray-600 mb-6">A chave para uma boa observação é separar fatos de suposições. Clique no botão para alternar entre os conceitos.</p>
+                <div class="relative w-full max-w-md mx-auto p-4 border-2 border-dashed border-gray-300 rounded-lg text-center">
+                    <div id="observe-interpret-content">
+                        <!-- Content will be injected by JS -->
+                    </div>
+                    <button id="toggle-observe" class="mt-4 bg-teal-600 text-white font-semibold py-2 px-5 rounded-lg hover:bg-teal-700 transition">Alternar Conceito</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 4: Atividade 2 -->
+        <section id="slide4" class="py-16">
+            <h2 class="text-4xl font-bold section-title text-center mb-12">O que Faz Este Lugar Funcionar?</h2>
+            <div class="max-w-5xl mx-auto">
+                <p class="text-center text-lg text-gray-600 mb-8">O Mapeamento de Sistemas é como criar um raio-x do território. Clique nos componentes abaixo para explorar e começar a construir seu **Mapa de Hipóteses**.</p>
+                <div class="grid md:grid-cols-3 gap-6 text-center">
+                    <div class="map-component-card p-6 bg-white rounded-xl shadow-lg cursor-pointer" data-component="atores">
+                        <h3 class="text-2xl font-bold text-blue-600">Atores</h3>
+                        <p class="text-gray-500">Quem está aqui?</p>
+                    </div>
+                    <div class="map-component-card p-6 bg-white rounded-xl shadow-lg cursor-pointer" data-component="recursos">
+                        <h3 class="text-2xl font-bold text-green-600">Recursos</h3>
+                        <p class="text-gray-500">O que existe aqui?</p>
+                    </div>
+                    <div class="map-component-card p-6 bg-white rounded-xl shadow-lg cursor-pointer" data-component="fluxos">
+                        <h3 class="text-2xl font-bold text-orange-600">Fluxos</h3>
+                        <p class="text-gray-500">O que se move por aqui?</p>
+                    </div>
+                </div>
+                <div id="map-details" class="mt-8 p-6 bg-gray-100 rounded-lg min-h-[120px]">
+                    <p class="text-gray-500 italic">Selecione um componente para ver detalhes e perguntas-guia.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 5: Atividade 3 -->
+        <section id="slide5" class="py-16 bg-teal-50/50 rounded-2xl">
+            <h2 class="text-4xl font-bold section-title text-center mb-12">Suas Ferramentas de Explorador</h2>
+            <div class="max-w-4xl mx-auto space-y-4">
+                <div class="tech-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <button class="w-full text-left p-5 font-semibold text-lg flex justify-between items-center">
+                        1. Caminhada Transversal
+                        <span class="arrow transform transition-transform">▼</span>
+                    </button>
+                    <div class="details-content px-5 pb-5">
+                        <p class="text-gray-700">Ande por um caminho predefinido (ex: da praia até o centro da vila) e anote tudo o que muda no ambiente, nas construções e nas atividades. O que a paisagem te conta sobre a história e a economia do lugar?</p>
+                    </div>
+                </div>
+                <div class="tech-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <button class="w-full text-left p-5 font-semibold text-lg flex justify-between items-center">
+                        2. Documentação Fotográfica
+                        <span class="arrow transform transition-transform">▼</span>
+                    </button>
+                    <div class="details-content px-5 pb-5">
+                        <p class="text-gray-700">Seja um "caçador" de imagens que revelam algo. Fotografe padrões (ex: todas as fachadas de lojas), contrastes (ex: uma casa de luxo ao lado de uma simples) e "gambiarras" (soluções criativas e improvisadas). Uma imagem pode revelar uma necessidade oculta.</p>
+                    </div>
+                </div>
+                <div class="tech-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <button class="w-full text-left p-5 font-semibold text-lg flex justify-between items-center">
+                        3. Observação de Fluxos
+                        <span class="arrow transform transition-transform">▼</span>
+                    </button>
+                    <div class="details-content px-5 pb-5">
+                        <p class="text-gray-700">Sente-se em um ponto chave (uma praça, um porto, a entrada de um mercado) por 20 minutos e apenas observe. Quem passa? O que carregam? Estão sozinhos ou em grupo? Para onde vão? Isso ajuda a entender o ritmo e as rotinas da comunidade.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 6: Atividade 4 -->
+        <section id="slide6" class="py-16">
+            <h2 class="text-4xl font-bold section-title text-center mb-12">Missão: Validar Nosso Mapa</h2>
+            <div class="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-lg">
+                <h3 class="text-2xl font-bold mb-6">Plano de Voo da Imersão</h3>
+                <p class="text-gray-600 mb-6">Antes de ir a campo, cada grupo deve responder a estas perguntas para ter uma missão clara. Lembre-se: o objetivo desta primeira imersão é entender o **CONTEXTO**.</p>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block font-semibold text-gray-700">1. Qual área nosso grupo irá explorar?</label>
+                        <input type="text" class="w-full mt-1 p-2 border border-gray-300 rounded-md" placeholder="Ex: A orla da praia e as ruas comerciais próximas.">
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-gray-700">2. Que hipóteses do nosso mapa queremos confirmar ou desafiar?</label>
+                        <input type="text" class="w-full mt-1 p-2 border border-gray-300 rounded-md" placeholder="Ex: Acreditamos que o turismo é a principal fonte de renda.">
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-gray-700">3. Quem será o responsável por registrar as observações?</label>
+                        <input type="text" class="w-full mt-1 p-2 border border-gray-300 rounded-md" placeholder="Ex: Maria (fotos), João (anotações).">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 7: Entrega -->
+        <section id="slide7" class="py-16 bg-teal-600 text-white rounded-2xl">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl font-bold mb-8">Entregas do Encontro</h2>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-teal-700/50 p-6 rounded-lg">
+                        <h3 class="text-xl font-bold mb-2">1. Um Mapa de Hipóteses do Território</h3>
+                        <p>Nosso guia inicial para a exploração.</p>
+                    </div>
+                    <div class="bg-teal-700/50 p-6 rounded-lg">
+                        <h3 class="text-xl font-bold mb-2">2. Um Plano de Observação</h3>
+                        <p>Nossa missão clara para a imersão de campo.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Slide 8: Encerramento -->
+    <footer id="slide8" class="text-center py-16">
+        <h2 class="text-3xl font-bold text-gray-800">Boa exploração!</h2>
+        <p class="text-lg text-gray-600 mt-4 max-w-2xl mx-auto">Tragam suas descobertas, surpresas e, principalmente, suas dúvidas para o nosso próximo encontro.</p>
+        <p class="mt-8 text-teal-600 font-semibold text-xl">Até breve!</p>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // --- Navigation Active State ---
+        const sections = document.querySelectorAll('section, header');
+        const navItems = document.querySelectorAll('.nav-item');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 60) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navItems.forEach(a => {
+                a.classList.remove('active');
+                if (a.getAttribute('href') === `#${current}`) {
+                    a.classList.add('active');
+                }
+            });
+        });
+
+        // --- Observe vs Interpret Toggle ---
+        const toggleContent = document.getElementById('observe-interpret-content');
+        const toggleButton = document.getElementById('toggle-observe');
+        let isObserving = true;
+        
+        const observeData = {
+            title: 'OBSERVAR (Fato)',
+            text: '"A casa tem uma rede na varanda."',
+            color: 'border-blue-500'
+        };
+        const interpretData = {
+            title: 'INTERPRETAR (Suposição)',
+            text: '"As pessoas ali são preguiçosas."',
+            color: 'border-red-500'
+        };
+
+        function updateToggleContent() {
+            const data = isObserving ? observeData : interpretData;
+            toggleContent.innerHTML = `
+                <div class="border-l-4 p-4 rounded-r-lg ${data.color} bg-gray-50">
+                    <h4 class="font-bold text-lg">${data.title}</h4>
+                    <p class="text-gray-700 text-xl italic mt-2">${data.text}</p>
+                </div>
+            `;
+        }
+        toggleButton.addEventListener('click', () => {
+            isObserving = !isObserving;
+            updateToggleContent();
+        });
+        updateToggleContent();
+
+        // --- System Map Component Details ---
+        const componentCards = document.querySelectorAll('.map-component-card');
+        const detailsContainer = document.getElementById('map-details');
+        const mapDetailsData = {
+            atores: {
+                title: 'Atores: Quem está aqui?',
+                text: 'Liste todos os grupos de pessoas e organizações. Pescadores, comerciantes, turistas, prefeitura, ONGs, donos de pousada, etc. Quem tem mais poder? Quem é mais vulnerável?',
+                color: 'bg-blue-100'
+            },
+            recursos: {
+                title: 'Recursos: O que existe aqui?',
+                text: 'Identifique os recursos naturais, financeiros e de infraestrutura. Rios, mangues, portos, escolas, acesso à internet, linhas de crédito. O que é abundante? O que é escasso?',
+                color: 'bg-green-100'
+            },
+            fluxos: {
+                title: 'Fluxos: O que se move por aqui?',
+                text: 'Observe os movimentos e trocas. Fluxo de dinheiro (de onde vem, para onde vai?), de peixes, de lixo, de informação, de pessoas. Onde estão os gargalos?',
+                color: 'bg-orange-100'
+            }
+        };
+
+        componentCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const component = card.dataset.component;
+                const data = mapDetailsData[component];
+                detailsContainer.className = `mt-8 p-6 rounded-lg min-h-[120px] ${data.color} transition-all duration-300`;
+                detailsContainer.innerHTML = `
+                    <h4 class="font-bold text-xl mb-2">${data.title}</h4>
+                    <p class="text-gray-800">${data.text}</p>
+                `;
+                componentCards.forEach(c => c.style.transform = 'scale(1)');
+                card.style.transform = 'scale(1.05)';
+            });
+        });
+
+        // --- Technique Accordion ---
+        const techCards = document.querySelectorAll('.tech-card');
+        techCards.forEach(card => {
+            const button = card.querySelector('button');
+            const details = card.querySelector('.details-content');
+            const arrow = card.querySelector('.arrow');
+
+            button.addEventListener('click', () => {
+                const isOpen = details.style.maxHeight && details.style.maxHeight !== '0px';
+                if (isOpen) {
+                    details.style.maxHeight = '0px';
+                    arrow.style.transform = 'rotate(0deg)';
+                } else {
+                    details.style.maxHeight = details.scrollHeight + 'px';
+                    arrow.style.transform = 'rotate(180deg)';
+                }
+            });
+        });
+
+    });
+    </script>
+</body>
+</html>
