@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferramenta: Plano de Ação do Mini-Piloto</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chosen Palette: Coastal Forest -->
+    <!-- Application Structure Plan: A single-page application structured as a step-by-step interactive form. Each section of the markdown framework is converted into a card with editable fields. This version is simplified to act as a digital worksheet without print/export functionality. -->
+    <!-- Visualization & Content Choices: Report Info (Mini-Pilot Action Plan) -> Goal (Create a tool for planning and documenting a test pilot) -> Presentation (Interactive form with cards and tables) -> Interaction (User input, auto-expanding textareas) -> Justification (Provides a guided digital worksheet for the planning process). -> Library/Method (Vanilla JS, TailwindCSS). -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        textarea {
+            resize: none;
+            overflow: hidden;
+            min-height: 40px;
+        }
+        .table-cell {
+            padding: 8px;
+            vertical-align: top;
+        }
+        .table-textarea {
+             width: 100%;
+             padding: 8px;
+             border: 1px solid #e2e8f0;
+             border-radius: 6px;
+             background-color: #f8fafc;
+             outline: none;
+             transition: all 0.2s;
+        }
+       .table-textarea:focus {
+            border-color: #10B981;
+            background-color: white;
+            box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+       }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <div id="app" class="container mx-auto max-w-5xl p-4 sm:p-6 lg:p-8">
+
+        <header class="text-center mb-10">
+            <h1 class="text-4xl font-bold text-emerald-700 mb-2">Plano de Ação do Mini-Piloto</h1>
+            <p class="text-lg text-slate-600">Preencha este plano para detalhar como vai testar a sua ideia no mundo real.</p>
+        </header>
+
+        <main class="space-y-8">
+            <!-- Nome da Solução -->
+            <div class="bg-white p-6 rounded-xl shadow-md">
+                 <h2 class="text-xl font-bold text-slate-800 mb-1">Nome da Solução/Projeto:</h2>
+                 <input id="projectName" type="text" placeholder="Escreva aqui o nome da vossa ideia" class="w-full p-2 border-b-2 border-slate-200 focus:border-emerald-500 outline-none transition duration-300 text-lg">
+            </div>
+            
+            <!-- 1. O Grande Objetivo do Teste -->
+            <div class="bg-white p-6 rounded-xl shadow-md">
+                <h2 class="text-2xl font-bold text-emerald-700 mb-3">🎯 1. O Grande Objetivo do Teste</h2>
+                <label for="main-goal" class="font-semibold text-slate-600 block mb-2">Qual é a pergunta mais importante que este mini-piloto precisa de responder?</label>
+                <textarea id="main-goal" class="w-full p-3 bg-slate-100 rounded-md focus:ring-2 focus:ring-emerald-400 outline-none transition" placeholder="Ex: Precisamos de validar se os restaurantes locais estão realmente dispostos a pagar uma comissão de 5% pelo nosso serviço de conexão com os pescadores."></textarea>
+            </div>
+            
+            <!-- 2. Definições do Mini-Piloto -->
+            <div class="bg-white p-6 rounded-xl shadow-md">
+                <h2 class="text-2xl font-bold text-emerald-700 mb-4">⚙️ 2. Definições do Mini-Piloto</h2>
+                <div class="space-y-4">
+                    <div>
+                        <label for="duration" class="font-semibold text-slate-600 block mb-1">Duração do Teste:</label>
+                        <input id="duration" type="text" placeholder="Ex: 1 semana (de 01/10 a 07/10)." class="w-full p-2 bg-slate-100 rounded-md outline-none focus:ring-2 focus:ring-emerald-400">
+                    </div>
+                    <div>
+                        <label for="participants" class="font-semibold text-slate-600 block mb-1">Participantes Envolvidos:</label>
+                        <input id="participants" type="text" placeholder="Ex: 2 pescadores parceiros e 3 restaurantes da orla." class="w-full p-2 bg-slate-100 rounded-md outline-none focus:ring-2 focus:ring-emerald-400">
+                    </div>
+                    <div>
+                        <label for="resources" class="font-semibold text-slate-600 block mb-1">Recursos Essenciais (de baixo custo):</label>
+                        <input id="resources" type="text" placeholder="Ex: 1 número de WhatsApp Business, 1 planilha, 2 horas/dia." class="w-full p-2 bg-slate-100 rounded-md outline-none focus:ring-2 focus:ring-emerald-400">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Plano de Ação: Passo a Passo -->
+            <div class="bg-white p-6 rounded-xl shadow-md">
+                <h2 class="text-2xl font-bold text-emerald-700 mb-4">🗺️ 3. Plano de Ação: Passo a Passo</h2>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full">
+                        <thead class="bg-slate-100">
+                            <tr>
+                                <th class="text-left font-semibold p-3">Ação / Tarefa</th>
+                                <th class="text-left font-semibold p-3">Responsável(eis)</th>
+                                <th class="text-left font-semibold p-3">Prazo Final</th>
+                                <th class="text-left font-semibold p-3">Resultado Esperado</th>
+                            </tr>
+                        </thead>
+                        <tbody id="action-plan-table">
+                            <!-- Rows serão adicionadas pelo JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 4. Plano de Aprendizado -->
+            <div class="bg-white p-6 rounded-xl shadow-md">
+                <h2 class="text-2xl font-bold text-emerald-700 mb-4">📊 4. Plano de Aprendizado: Como Medimos o Sucesso?</h2>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full">
+                        <thead class="bg-slate-100">
+                            <tr>
+                                <th class="text-left font-semibold p-3">Métrica de Sucesso</th>
+                                <th class="text-left font-semibold p-3">Meta para o Piloto</th>
+                                <th class="text-left font-semibold p-3">Como Vamos Medir?</th>
+                            </tr>
+                        </thead>
+                        <tbody id="learning-plan-table">
+                            <!-- Rows serão adicionadas pelo JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Auto-resize textarea
+            const autoResize = (el) => {
+                el.style.height = 'auto';
+                el.style.height = (el.scrollHeight) + 'px';
+            };
+
+            const setupTextareaAutoResize = (container) => {
+                container.querySelectorAll('textarea').forEach(textarea => {
+                    textarea.addEventListener('input', () => autoResize(textarea));
+                    autoResize(textarea); // Initial resize
+                });
+            };
+            
+            setupTextareaAutoResize(document.getElementById('app'));
+            
+            // Popular tabelas
+            const actionPlanTable = document.getElementById('action-plan-table');
+            const learningPlanTable = document.getElementById('learning-plan-table');
+
+            const initialActionRows = [
+                { task: 'Ex: Criar o grupo de WhatsApp com os participantes.', responsible: 'Ex: Maria', deadline: 'Ex: 29/09', result: 'Ex: Grupo criado e mensagem de boas-vindas enviada.' },
+                { task: 'Ex: Visitar os 3 restaurantes para confirmar a participação.', responsible: 'Ex: João e Ana', deadline: 'Ex: 30/09', result: 'Ex: Donos dos restaurantes cientes e alinhados.' },
+                { task: 'Ex: Gerir o grupo diariamente, publicando as ofertas.', responsible: 'Ex: Todo o grupo', deadline: 'Ex: 01/10 a 07/10', result: 'Ex: Pelo menos uma oferta publicada por dia.' },
+                { task: '', responsible: '', deadline: '', result: '' },
+                { task: '', responsible: '', deadline: '', result: '' }
+            ];
+
+            initialActionRows.forEach(rowData => {
+                const row = actionPlanTable.insertRow();
+                row.innerHTML = `
+                    <td class="table-cell"><textarea class="table-textarea" placeholder="O que vamos fazer?">${rowData.task}</textarea></td>
+                    <td class="table-cell"><textarea class="table-textarea" placeholder="Quem?">${rowData.responsible}</textarea></td>
+                    <td class="table-cell"><textarea class="table-textarea" placeholder="Quando?">${rowData.deadline}</textarea></td>
+                    <td class="table-cell"><textarea class="table-textarea" placeholder="O que esperamos?">${rowData.result}</textarea></td>
+                `;
+            });
+
+            const initialLearningRows = [
+                { metric: 'Ex: Número de vendas realizadas através do grupo.', target: 'Ex: Pelo menos 10 vendas concluídas.', measurement: 'Ex: Contagem de pedidos na planilha.' },
+                { metric: 'Ex: % de restaurantes que pagaram a comissão.', target: 'Ex: 100% dos restaurantes.', measurement: 'Ex: Coluna "Status de Pagamento" na planilha.' },
+                { metric: 'Ex: Nível de satisfação dos pescadores (1-5).', target: 'Ex: Média acima de 4.', measurement: 'Ex: Pergunta direta no feedback.' },
+                { metric: '', target: '', measurement: '' }
+            ];
+
+            initialLearningRows.forEach(rowData => {
+                const row = learningPlanTable.insertRow();
+                row.innerHTML = `
+                    <td class="table-cell"><textarea class="table-textarea" placeholder="O que vamos medir?">${rowData.metric}</textarea></td>
+                    <td class="table-cell"><textarea class="table-textarea" placeholder="Qual número indica sucesso?">${rowData.target}</textarea></td>
+                    <td class="table-cell"><textarea class="table-textarea" placeholder="Como?">${rowData.measurement}</textarea></td>
+                `;
+            });
+            
+            setupTextareaAutoResize(actionPlanTable);
+            setupTextareaAutoResize(learningPlanTable);
+        });
+    </script>
+</body>
+</html>
+
